@@ -23,27 +23,4 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend:latest
 
-  deploy-to-aks:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
-        with:
-          version: 'latest'
-
-      - name: Configure Kubeconfig
-        run: |
-          echo "${{ secrets.KUBE_CONFIG }}" > kubeconfig
-          export KUBECONFIG=kubeconfig
-
-      - name: Deploy to AKS
-        run: |
-          kubectl apply -f deployment/ram-deployment.yaml
-          kubectl apply -f deployment/ram-service.yaml
-          
-      - name: Verify Deployment
-        run: kubectl get pods -o wide
+ 
