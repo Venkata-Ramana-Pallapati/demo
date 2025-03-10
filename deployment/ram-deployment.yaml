@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ram-deployment
+  name: my-app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: ram
+      app: my-app
   template:
     metadata:
       labels:
-        app: ram
+        app: my-app
     spec:
       containers:
-      - name: ram-container
-        image: your-dockerhub-username/ram-image:latest
-        ports:
-        - containerPort: 80
+        - name: my-app
+          image: YOUR_DOCKERHUB_USERNAME/my-app:latest
+          ports:
+            - containerPort: 80
